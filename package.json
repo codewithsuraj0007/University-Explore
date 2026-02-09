@@ -1,0 +1,8 @@
+{
+  "name": "university-explore",
+  "version": "1.0.0",
+  "description": "UniExplorer Netlify Functions Backend",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
