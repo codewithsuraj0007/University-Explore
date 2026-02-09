@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explore universities worldwide with Global University Explorer. Search by country and state, discover top institutions with real-time data.">
+    <meta name="keywords"
+        content="universities, global education, university search, higher education, colleges worldwide">
+    <meta name="author" content="Global University Explorer">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Global University Explorer - Discover Universities Worldwide">
+    <meta property="og:description"
+        content="Search and explore universities across the globe with our premium platform">
+    <meta property="og:image" content="/assets/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Global University Explorer">
+    <meta name="twitter:description" content="Discover universities worldwide with real-time data">
+
+    <title>Global University Explorer | Discover Universities Worldwide</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23FFD700'/><stop offset='100%' style='stop-color:%23FF8C00'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='70' font-size='60' text-anchor='middle'>🎓</text></svg>">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="http://universities.hipolabs.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Scripts - Defer for faster load -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js" defer></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">UniExplorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#explore" class="nav-link">Explore</a></li>
+                <li><a href="#top-universities" class="nav-link">Top Universities</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                   <li><a href="#consultation" class="nav-link">Consultation</a></li>
+            </ul>
+            <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section id="home" class="hero" role="region" aria-label="Hero section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Discover Your <span class="gradient-text">Dream University</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Explore thousands of universities worldwide with real-time data.
+                    Find the perfect institution for your future.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary"
+                        onclick="document.getElementById('explore').scrollIntoView({behavior: 'smooth'})">
+                        Start Exploring
+                    </button>
+                    <button class="btn btn-secondary"
+                        onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Universities Carousel -->
+        <section id="top-universities" class="carousel-section" role="region" aria-label="Top universities">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Top Universities by Country</h2>
+                    <p class="section-subtitle">Explore leading institutions worldwide</p>
+                </div>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" aria-label="Previous slide">‹</button>
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Static Carousel Cards -->
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇺🇸</div>
+                            <h3 class="carousel-title">United States</h3>
+                            <p class="carousel-count">5,758 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Harvard University</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Stanford University</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>MIT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇬🇧</div>
+                            <h3 class="carousel-title">United Kingdom</h3>
+                            <p class="carousel-count">1,245 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Oxford</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Cambridge</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Imperial College London</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇨🇦</div>
+                            <h3 class="carousel-title">Canada</h3>
+                            <p class="carousel-count">892 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Toronto</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>McGill University</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of British Columbia</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇦🇺</div>
+                            <h3 class="carousel-title">Australia</h3>
+                            <p class="carousel-count">673 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Australian National University</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Melbourne</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Sydney</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇩🇪</div>
+                            <h3 class="carousel-title">Germany</h3>
+                            <p class="carousel-count">1,156 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Technical University of Munich</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Heidelberg University</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>Ludwig Maximilian University</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card">
+                            <div class="carousel-country">🇮🇳</div>
+                            <h3 class="carousel-title">India</h3>
+                            <p class="carousel-count">1,987 Universities</p>
+                            <div class="carousel-list">
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>IIT Bombay</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>IIT Delhi</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-icon">🎓</span>
+                                    <span>University of Delhi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" aria-label="Next slide">›</button>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="explore" class="search-section" role="region" aria-label="University search">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Find Universities</h2>
+                    <p class="section-subtitle">Search by country and state to discover institutions</p>
+                </div>
+
+                <div class="search-card glass">
+                    <div class="search-grid">
+                        <div class="input-group">
+                            <label for="country" class="input-label">Country</label>
+                            <input type="text" id="country" class="input-field" placeholder="e.g., United States"
+                                aria-label="Enter country name" autocomplete="off">
+                            <span class="input-icon">🌍</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="state" class="input-label">State / Province (Optional)</label>
+                            <input type="text" id="state" class="input-field" placeholder="e.g., California"
+                                aria-label="Enter state or province" autocomplete="off">
+                            <span class="input-icon">📍</span>
+                        </div>
+                    </div>
+
+                    <button id="searchBtn" class="btn btn-search" aria-label="Search universities">
+                        <span class="btn-text">Search Universities</span>
+                        <span class="btn-icon">🔍</span>
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading hidden" role="status" aria-live="polite">
+                    <div class="spinner"></div>
+                    <p>Searching universities...</p>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="results-grid"></div>
+
+                <!-- No Results -->
+                <div id="noResults" class="no-results hidden">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>No Universities Found</h3>
+                    <p>Try adjusting your search criteria</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Stats Section -->
+        <section class="stats-section" role="region" aria-label="Platform statistics">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card glass">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-number" data-target="195">0</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon">🎓</div>
+                        <div class="stat-number" data-target="10000">0</div>
+                        <div class="stat-label">Universities</div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-number">Real-Time</div>
+                        <div class="stat-label">API Powered</div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon">🔒</div>
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free Access</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section" role="region" aria-label="About the platform">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2 class="section-title">How It Works</h2>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">🔍</div>
+                                <div class="feature-text">
+                                    <h3>Search Globally</h3>
+                                    <p>Access universities from every country with real-time data from Hipolabs API</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎯</div>
+                                <div class="feature-text">
+                                    <h3>Filter Precisely</h3>
+                                    <p>Narrow down results by country and state for targeted searches</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">⚡</div>
+                                <div class="feature-text">
+                                    <h3>Instant Results</h3>
+                                    <p>Lightning-fast client-side filtering with smooth animations</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🌐</div>
+                                <div class="feature-text">
+                                    <h3>Direct Access</h3>
+                                    <p>Visit official university websites with one click</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-visual glass">
+                        <div class="visual-content">
+                            <div class="visual-stat">
+                                <span class="visual-number">10K+</span>
+                                <span class="visual-label">Universities</span>
+                            </div>
+                            <div class="visual-stat">
+                                <span class="visual-number">195</span>
+                                <span class="visual-label">Countries</span>
+                            </div>
+                            <div class="visual-stat">
+                                <span class="visual-number">100%</span>
+                                <span class="visual-label">Accurate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultation Section -->
+        <section id="consultation" class="consultation-section" role="region" aria-label="Get consultation">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Need <span class="gradient-text">Guidance?</span></h2>
+                    <p class="section-subtitle">Get personalized consultation for choosing the best university</p>
+                </div>
+                
+                <div class="consultation-grid">
+                    <div class="consultation-info glass">
+                        <h3>Why Consult With Me?</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">🎯</div>
+                                <div class="feature-text">
+                                    <h4>Personalized Recommendations</h4>
+                                    <p>Get tailored university suggestions based on your goals</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">💡</div>
+                                <div class="feature-text">
+                                    <h4>Expert Guidance</h4>
+                                    <p>Navigate admission processes and requirements</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🌍</div>
+                                <div class="feature-text">
+                                    <h4>Global Insights</h4>
+                                    <p>Access to 10,000+ universities across 195 countries</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="consultation-form glass">
+                        <h3>Send Me a Message</h3>
+                        <form id="consultationForm">
+                            <div class="input-group">
+                                <label for="userName" class="input-label">Your Name</label>
+                                <input type="text" id="userName" class="input-field" placeholder="John Doe" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="userEmail" class="input-label">Email Address</label>
+                                <input type="email" id="userEmail" class="input-field" placeholder="john@example.com" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="userMessage" class="input-label">Your Message</label>
+                                <textarea id="userMessage" class="input-field textarea-field" rows="5" placeholder="Tell me about your university preferences, goals, and any questions..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-icon">📧</span>
+                            </button>
+                        </form>
+                        <div id="formStatus" class="form-status hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">🎓</span>
+                        <span class="logo-text">UniExplorer</span>
+                    </div>
+                    <p class="footer-tagline">Discover your future, one university at a time.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#explore">Search</a></li>
+                        <li><a href="#top-universities">Top Universities</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#consultation">Consultation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="http://universities.hipolabs.com" target="_blank" rel="noopener">Hipolabs API</a>
+                        </li>
+                        <li><a href="#" aria-label="Privacy Policy">Privacy Policy</a></li>
+                        <li><a href="#" aria-label="Terms of Service">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/codewithsuraj0007" aria-label="GitHub"><i
+                                    class="fa-brands fa-github"></i> GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/suraj-prajapati-0904b92b9/" aria-label="LinkedIn"><i
+                                    class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="https://x.com/SPrajapati11982" aria-label="Twitter"> <i
+                                    class="fa-brands fa-x-twitter"></i> Twitter</a></li>
+                        <li><a href="mailto:kingsuraj6387@gmail.com" aria-label="Gmail"> <i class="fa-regular fa-envelope"></i> Gmail</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Global University Explorer. All rights reserved.</p>
+                <p class="footer-credit">Powered by <a href="https://thesigma-developers.in/" target="_blank"
+                        rel="noopener">The Sigma Developers ( Er .Suraj prajapati )</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
