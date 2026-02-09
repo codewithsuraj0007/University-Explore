@@ -5,7 +5,7 @@
 
 // === CONFIGURATION ===
 const CONFIG = {
-    API_BASE: 'https://universities.hipolabs.com',
+    API_BASE: 'http://universities.hipolabs.com',
     ANIMATION_DELAY: 100,
     CAROUSEL_TOTAL: 6
 };
