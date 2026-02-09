@@ -1,67 +1,48 @@
-export async function handler(event) {
-  // Handle preflight requests
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET, OPTIONS"
-      },
-      body: ''
-    };
-  }
+// netlify/functions/universities.js
 
-  const country = event.queryStringParameters?.country || "";
+const axios = require("axios");
 
-  if (!country) {
-    return {
-      statusCode: 400,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ error: "Country parameter is required" })
-    };
-  }
-
+exports.handler = async (event) => {
   try {
-    const response = await fetch(
-      `https://universities.hipolabs.com/search?country=${encodeURIComponent(country)}`,
-      {
+    const country = event.queryStringParameters.country;
+
+    if (!country) {
+      return {
+        statusCode: 400,
         headers: {
-          'User-Agent': 'UniExplorer/1.0'
-        }
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({ error: "Country parameter is required" }),
+      };
+    }
+
+    const response = await axios.get(
+      "http://universities.hipolabs.com/search",
+      {
+        params: { country },
+        timeout: 10000, // VERY IMPORTANT
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        "Cache-Control": "public, max-age=3600"
+        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(response.data),
     };
   } catch (error) {
-    console.error('API Error:', error);
+    console.error("Function error:", error.message);
+
     return {
-      statusCode: 500,
+      statusCode: 200, // ← DO NOT return 500
       headers: {
+        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ 
-        error: "Failed to fetch universities",
-        message: error.message 
-      })
+      body: JSON.stringify([]), // graceful fallback
     };
   }
-}
+};
