@@ -5,7 +5,7 @@
 
 // === CONFIGURATION ===
 const CONFIG = {
-    API_BASE: 'http://universities.hipolabs.com',
+    API_BASE: '/.netlify/functions/universities',
     ANIMATION_DELAY: 100,
     CAROUSEL_TOTAL: 6
 };
@@ -162,12 +162,30 @@ async function handleSearch() {
 // === API CALLS ===
 async function fetchUniversities(country) {
     try {
-        const response = await axios.get(`${CONFIG.API_BASE}/search`, {
-            params: { country }
+        const response = await axios.get(CONFIG.API_BASE, {
+            params: { country },
+            timeout: 10000 // 10 second timeout
         });
-        return response.data || [];
+        
+        // Validate response
+        if (!response.data || !Array.isArray(response.data)) {
+            console.warn('Invalid API response format');
+            return [];
+        }
+        
+        return response.data;
     } catch (error) {
-        throw new Error('API request failed');
+        console.error('API Error:', error);
+        if (error.response) {
+            // Server responded with error
+            throw new Error(`Server error: ${error.response.status}`);
+        } else if (error.request) {
+            // Request made but no response
+            throw new Error('Network error: No response from server');
+        } else {
+            // Something else happened
+            throw new Error('Request failed');
+        }
     }
 }
 
@@ -238,7 +256,7 @@ function initStaticCarousel() {
 
 function scrollCarousel(direction) {
     const track = elements.carouselTrack;
-    const cardWidth = 320 + 32; // card width + gap
+    const cardWidth = 256 + 32; // card width (256px from CSS) + gap (32px from CSS)
     
     if (direction === 'next') {
         state.currentCarouselIndex = (state.currentCarouselIndex + 1) % CONFIG.CAROUSEL_TOTAL;
@@ -256,7 +274,7 @@ function scrollCarousel(direction) {
 
 function scrollToCarouselIndex(index) {
     const track = elements.carouselTrack;
-    const cardWidth = 320 + 32;
+    const cardWidth = 256 + 32; // card width (256px from CSS) + gap (32px from CSS)
     track.scrollTo({
         left: cardWidth * index,
         behavior: 'smooth'
